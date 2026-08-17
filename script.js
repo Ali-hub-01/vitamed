@@ -172,10 +172,15 @@
     }
   });
 
-  /* Единая точка конверсий — сюда позже повесят gtag('event', ...) */
+  /* Единая точка конверсий → Google Ads (AW-18395260701) */
   function trackConversion(eventName, params) {
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', eventName, params || {});
+    if (typeof window.gtag !== 'function') return;
+    if (eventName === 'phone_click' && typeof window.gtag_report_phone === 'function') {
+      window.gtag_report_phone();            // Интерактивные номера телефонов
+    } else if (eventName === 'whatsapp_click' && typeof window.gtag_report_contact === 'function') {
+      window.gtag_report_contact();          // Контакт
+    } else if (eventName === 'lead_form_submit' && typeof window.gtag_report_lead === 'function') {
+      window.gtag_report_lead();             // Отправка формы для потенциальных клиентов
     }
     /* console.log('[conversion]', eventName, params); */
   }
