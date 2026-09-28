@@ -150,6 +150,11 @@
 
       /* хук для аналитики (gtag повесят позже) */
       trackConversion('lead_form_submit', { service: service || 'not_selected' });
+
+      /* дублируем заявку боту (Telegram через Cloudflare Worker); конверсию уже отправили выше */
+      if (window.medhomeSendLead) {
+        window.medhomeSendLead({ name: name, phone: phone, service: service, source: 'форма на сайте', fireConversion: false });
+      }
     });
 
     /* снятие подсветки ошибки при вводе */
