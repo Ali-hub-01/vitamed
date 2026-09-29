@@ -104,7 +104,7 @@
   });
 
   /* ---------- Форма заявки → WhatsApp ---------- */
-  var WHATSAPP_NUMBER = '77478528001';
+  var WHATSAPP_NUMBER = '77078141226';
   var form = document.getElementById('leadForm');
   var success = document.getElementById('formSuccess');
 
